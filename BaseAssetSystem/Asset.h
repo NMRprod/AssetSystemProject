@@ -25,4 +25,5 @@ public:
     std::string getLocation() const;
     double getValue() const;
     int getYearsOfUsing() const;
+    void setLocation(std::string& newLocation);
 };

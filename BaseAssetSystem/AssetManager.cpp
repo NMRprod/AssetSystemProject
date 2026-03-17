@@ -5,8 +5,10 @@ void AssetManager::addAsset(const std::string& name, const std::string& category
 }
 
 void AssetManager::listAssets() {
+    std::cout << "\nList of assets:" << std::endl;
     for (const auto& asset : assets) {
-        std::cout << "ID: " << asset.getId()
+        std::cout
+            << "ID: " << asset.getId()
             << " | Name: " << asset.getName()
             << " | Category: " << asset.getCategory()
             << " | Location: " << asset.getLocation()
@@ -14,6 +16,7 @@ void AssetManager::listAssets() {
             << " | Years of using: " << asset.getYearsOfUsing()
             << std::endl;
     }
+    std::cout << std::endl << std::endl;
 }
 
 Asset* AssetManager::findAsset(int id) {
@@ -29,6 +32,7 @@ void AssetManager::deleteAsset(int id) {
     for (auto it = assets.begin(); it != assets.end(); ++it) {
         if (it->getId() == id) {
             assets.erase(it);
+            return;
         }
     }
 }

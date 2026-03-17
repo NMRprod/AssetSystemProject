@@ -24,3 +24,7 @@ double Asset::getValue() const {
 int Asset::getYearsOfUsing() const {
     return yearsOfUsing;
 }
+
+void Asset::setLocation(std::string& newLocation) {
+    location = newLocation;
+}
