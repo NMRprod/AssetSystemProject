@@ -4,10 +4,10 @@
 
 class CommandHandler {
 private:
-    AssetManager manager;
+    AssetManager& manager;
 
 public:
-    CommandHandler() = default;
+    CommandHandler(AssetManager& m) : manager(m) {}
 
     void run();
 

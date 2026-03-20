@@ -125,11 +125,13 @@
   <ItemGroup>
     <ClInclude Include="Asset.h" />
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="AssetRepository.h" />
     <ClInclude Include="CommandHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Asset.cpp" />
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="AssetRepository.cpp" />
     <ClCompile Include="CommandHandler.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

@@ -1,0 +1,2 @@
+1;PC;machine;home;200;5;
+1;keyboard;perifiry;home;50;2;

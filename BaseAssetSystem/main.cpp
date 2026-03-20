@@ -2,9 +2,17 @@
 #include "Asset.h"
 #include "AssetManager.h"
 #include "CommandHandler.h"
+#include "AssetRepository.h"
 
 int main() {
-    CommandHandler app;
-    app.run();
+    AssetManager manager;
+    AssetRepository repository;
 
+    CommandHandler app(manager);
+
+    repository.load(manager);
+
+    app.run();
+    //repository.save(manager.getAssets());
+    
 }

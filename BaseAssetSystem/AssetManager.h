@@ -16,4 +16,6 @@ public:
     void listAssets();
     Asset* findAsset(int id);
     void deleteAsset(int id);
+
+    const std::vector<Asset>& getAssets() const;
 };

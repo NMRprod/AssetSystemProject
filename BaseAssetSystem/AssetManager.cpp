@@ -36,3 +36,7 @@ void AssetManager::deleteAsset(int id) {
         }
     }
 }
+
+const std::vector<Asset>& AssetManager::getAssets() const {
+    return assets;
+}
