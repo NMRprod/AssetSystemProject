@@ -41,7 +41,10 @@ void AssetRepository::load(AssetManager& m) {
 			std::getline(ss, _value, ';');
 			std::getline(ss, _yearsOfUsing);
 
+			if (bufferLine.empty()) continue;
+
 			m.addAsset(_name, _category, _location, std::stod(_value), std::stoi(_yearsOfUsing));
 		}
+
 	}
 }

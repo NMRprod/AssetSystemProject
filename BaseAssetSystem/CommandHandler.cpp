@@ -35,6 +35,75 @@ void CommandHandler::run() {
     }
 } 
 
+std::string CommandHandler::getValidatedString(const std::string& promt, const std::function<std::string(const std::string&)> validator) {
+    while (true) {
+        std::cout << promt;
+
+        std::string input;
+        std::getline(std::cin, input);
+
+        std::string error = validator(input);
+        if (error.empty()) {
+            return input;
+        }
+        std::cout << error << std::endl;
+    }
+}
+
+double CommandHandler::getValidatedDouble(const std::string& promt, const std::function<std::string(double)> validator) {
+    while (true) {
+        std::cout << promt;
+
+        std::string input;
+        std::getline(std::cin, input);
+
+        double value;
+
+        try {
+            value = std::stod(input);
+        }
+        catch (const std::exception&) {
+            std::cout << "Invalid number format!" << std::endl;
+            continue;
+        }
+        
+
+        std::string error = validator(value);
+        if (error.empty()) {
+            return value;
+        }
+        std::cout << error << std::endl;
+    }
+    
+}
+
+int CommandHandler::getValidatedInt(const std::string& promt, const std::function<std::string(int)>& validator) {
+    while (true) {
+        std::cout << promt;
+
+        std::string input;
+        std::getline(std::cin, input);
+
+        int value;
+
+        try {
+            value = std::stoi(input);
+        }
+        catch (const std::exception&) {
+            std::cout << "Invalid number format!" << std::endl;
+            continue;
+        }
+
+        std::string error = validator(value);
+        if (error.empty()) {
+            return value;
+        }
+        std::cout << error << std::endl;
+    }
+}
+
+
+
 void CommandHandler::addAsset() {
     std::string _name;
     std::string _category;
@@ -42,16 +111,13 @@ void CommandHandler::addAsset() {
     double _value;
     int _yearsOfUsing;
 
-    std::cout << "Enter name: ";
-    std::cin >> _name;
-    std::cout << "\nEnter category of asset: ";
-    std::cin >> _category;
-    std::cout << "\nEnter location: ";
-    std::cin >> _location;
-    std::cout << "\nEnter value: ";
-    std::cin >> _value;
-    std::cout << "\nEnter years of using: ";
-    std::cin >> _yearsOfUsing;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    _name = getValidatedString("Enter name: ", [this](const std::string& s) {return validator.validateName(s); });
+    _category = getValidatedString("Enter category of asset: ", [this](const std::string& s) {return validator.validateCategory(s); });
+    _location = getValidatedString("Enter location: ", [this](const std::string& s) {return validator.validateLocation(s); });
+    _value = getValidatedDouble("Enter value: ", [this](double v){ return validator.validateValue(v); });
+    _yearsOfUsing = getValidatedInt("Enter years of using: ", [this](int y) {return validator.validateYearsOfUsing(y); });
 
     manager.addAsset(_name, _category, _location, _value, _yearsOfUsing);
 }
@@ -76,6 +142,10 @@ void CommandHandler::deleteAsset() {
     std::cout << "Enter asset's ID: ";
     std::cin >> _id;
     Asset* _asset = manager.findAsset(_id);
+    if (_asset == nullptr) {
+        std::cout << "\nAsset not found ";
+        return;
+    }
     assetName = _asset->getName();
     std::cout << "\nAre you sure that you want delete asset " << assetName << "?\n(y/n)\n";
     std::cin >> answer;

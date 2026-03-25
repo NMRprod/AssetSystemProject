@@ -1,2 +1,8 @@
 1;PC;machine;home;200;5;
-1;keyboard;perifiry;home;50;2;
+2;keyboard;perifiry;home;50;2;
+3;mouse;perifiry;home;30;1;
+4;monitor;machine;home;80.5;5;
+5;gamepad;peref;house;450;6;
+6;Cabel;peref;house;15;1;
+7;laptop asus;machine;house;900;4;
+8;cup holder;accesories;house;25;2;
